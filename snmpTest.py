@@ -1,4 +1,5 @@
 import SnmpOperations
+import ipaddress
 
 if __name__ == "__main__":
 
@@ -29,14 +30,26 @@ if __name__ == "__main__":
     oidarray.append(ramsize)
 
 
-
-
-    ip = input("Gib IP-Adresse ein!!")
-
-    resultarray = SnmpOperations.get(ip, oidarray, "public")
-
-    j = 0;
-
-    for i in oidarray:
-        print(oidsname[j] + ": " + str(resultarray[i]))
-        j = j+1
+    while True:
+        command = input("was willst du machen? Infos von bestimmter IP bekommen (get) oder ein gesamtes Netzwerk scannen (scan)")
+        if command == "get" :
+            ip = input("Gib IP-Adresse ein!!")
+            try:
+                resultarray = SnmpOperations.get(ip, oidarray, "public")
+                j = 0;
+                for i in oidarray:
+                    print(oidsname[j] + ": " + str(resultarray[i]))
+                    j = j+1
+            except:
+                print("Kann die Informationen dieser Adresse nicht abrufen.")
+        elif command == "scan":
+            network = input("Gib Netz-Adresse mit Subnetzmaske ein (z.B.: 192.168.0.0/24)")
+            try:
+                if '/' not in network:
+                    raise Exception
+                for ip in ipaddress.IPv4Network(network):
+                    print(ip)
+            except:
+                print("Etwas beim scannen ist Falsch gelaufen")
+        else:
+            print("falscher Befehl!!");
