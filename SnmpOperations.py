@@ -1,7 +1,8 @@
 from pysnmp import hlapi
+from pysnmp.hlapi import *
 
-def get(target, oids, credentials, port = 161, engine = hlapi.SnmpEngine(), context=hlapi.ContextData()):
-    handler = hlapi.getCmd(engine, hlapi.CommunityData(credentials), hlapi.UdpTransportTarget((target, port)), context, *construct_object_types(oids))
+def get(target, oids, credentials, port = 161, engine = SnmpEngine(), context=ContextData()):
+    handler = getCmd(engine, CommunityData(credentials), UdpTransportTarget((target, port)), context, *construct_object_types(oids))
     return fetch(handler, 1) [0]
 
 def construct_object_types(list_of_oids):
@@ -41,3 +42,20 @@ def cast(value):
             except (ValueError, TypeError):
                 pass
     return value
+
+
+def getsingleoid(ip, oid, community, ifscan = False):
+    handler= getCmd(SnmpEngine(), CommunityData(community), UdpTransportTarget((ip, 161)), ContextData(), ObjectType(ObjectIdentity(oid)))
+
+    errorIndication, errorStatus, errorIndex, varBinds = next(handler)
+    
+    if errorIndication:
+        pass
+    elif errorStatus:
+        print('%s at %s' % (errorStatus.prettyPrint(), errorIndex and varBinds[int(errorIndex) - 1][0] or '?'))
+    else:
+        if ifscan:
+            for varBind in varBinds:
+                print(ip + ": " + varBind[1])           #muss hier ausgegeben werden wenn man ein Netzwerk scannt weil es mit return und den Threads aus irgendeinen Grund nicht funtionirt
+        else:
+            return varBinds
