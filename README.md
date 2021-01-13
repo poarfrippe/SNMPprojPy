@@ -4,8 +4,8 @@ SNMP Tool in Python<br>
 SN Projekt<br><br>
 
 Funktionalitaet:<br>
-Get was einige wichtige Informationen eines Gerätes ausgibt.<br>
-Get wo man noch zusätzlich zur IP die OID angeben muss. Damit kann man alle SNMP Informationen eines Gerätes abfagen insofern mann die OID weiß.<br>
+Get was einige wichtige Informationen eines Geraetes ausgibt.<br>
+Get wo man noch zusätzlich zur IP die OID angeben muss. Damit kann man alle SNMP Informationen eines Geraetes abfagen insofern mann die OID weiß.<br>
 Community Strings können bei aufruf eines Kommandos angegeben werden (default = public).<br>
 Scan wobei ein Gesamtes Netz nach Geräten, die SNMP Aktiviert haben, untersucht wird.<br><br>
 
