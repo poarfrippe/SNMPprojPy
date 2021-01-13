@@ -13,4 +13,8 @@ Die Eingabe erfolgt entweder ueber die Kommandozeile oder ueber eine GUI. Das Ka
 
 Um das Programm auszufuehren bracht man python und zusaetzlich dazu die pysnmp library. Dann kann man die File snmpTest.py ausführen. <br><br>
 
-Außerdem Habe ich auf diesem Github Repository ein Releas erstellt bei dem mann sich die Ausfuerbare datei herunterladen kann. Weitere Informationen dazu im Releas
+Außerdem Habe ich auf diesem Github Repository ein Releas erstellt bei dem mann sich die Ausfuerbare datei herunterladen kann. Weitere Informationen dazu im Releas<br><br>
+
+Zukuenftige schritte:<br>
+Traps und Informs empfangen und ausgeben<br>
+Informationen Von MIB File auslesen
